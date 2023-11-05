@@ -26,7 +26,9 @@ create table project
     name             text not null,
     description      text,
     info             text,
-    nmap_initialized boolean default false
+    nmap_initialized boolean default false,
+    created timestamp not null,
+    updated timestamp
 );
 create table target
 (
@@ -36,12 +38,28 @@ create table target
     info        text,
     ip_address  text,
     project_id  bigint references project (id),
-    state       text
+    state       text,
+    created timestamp not null,
+    updated timestamp
+);
+create table nmap_scan
+(
+    id         SERIAL primary key,
+    start_time bigint,
+    status     text
+        CONSTRAINT status_enum check (status in ('RUNNING', 'DONE', 'FAILED')),
+    project_id bigint references project (id),
+    raw text,
+    project_run_ordinal integer,
+    errors text,
+    created timestamp not null,
+    updated timestamp
 );
 create table target_service
 (
     id             SERIAL primary key,
     name           text    not null,
+    overwritten_name text,
     port           integer not null,
     state          text    not null,
     target_id      bigint references target (id),
@@ -51,14 +69,39 @@ create table target_service
     script_outputs text,
     cpe            text,
     format         text,
-    protocol       text
+    protocol       text,
+    seen_on_scan_id    bigint references nmap_scan(id),
+    created timestamp not null,
+    updated timestamp
+);
+
+create table script_result
+(
+    id                SERIAL primary key,
+    title              text,
+    content            text,
+    target_service_id bigint references target_service (id),
+    created timestamp not null,
+    updated timestamp
+);
+
+create table script_result_element
+(
+    id                    SERIAL primary key,
+    key                   text,
+    value                 text,
+    script_result_id bigint references script_result (id),
+    created timestamp not null,
+    updated timestamp
 );
 create table hostname
 (
     id        SERIAL primary key,
     hostname  text not null,
     type      text,
-    target_id bigint references target (id)
+    target_id bigint references target (id),
+    created timestamp not null,
+    updated timestamp
 );
 
 create table service_note
@@ -66,17 +109,12 @@ create table service_note
     id                SERIAL primary key,
     title             text,
     content           text,
-    target_service_id bigint references target_service (id)
+    target_service_id bigint references target_service (id),
+    created timestamp not null,
+    updated timestamp
 );
 
-create table nmap_scan
-(
-    id         SERIAL primary key,
-    start_time bigint,
-    status     text
-        CONSTRAINT status_enum check (status in ('RUNNING', 'DONE', 'FAILED')),
-    project_id bigint references project (id)
-);
+
 create table nmap_host
 (
     id           SERIAL primary key,
@@ -85,7 +123,9 @@ create table nmap_host
     info         text,
     ip_address   text,
     nmap_scan_id bigint references nmap_scan (id),
-    state        text
+    state        text,
+    created timestamp not null,
+    updated timestamp
 );
 create table nmap_service
 (
@@ -99,28 +139,48 @@ create table nmap_service
     product      text,
     cpe          text,
     format       text,
-    protocol     text
+    protocol     text,
+    created timestamp not null,
+    updated timestamp
 );
 create table nmap_hostname
 (
     id           SERIAL primary key,
     hostname     text not null,
     type         text,
-    nmap_host_id bigint references nmap_host (id)
+    nmap_host_id bigint references nmap_host (id),
+    created timestamp not null,
+    updated timestamp
 );
 create table nmap_script_result
 (
     id              SERIAL primary key,
     name            text,
     output          text,
-    nmap_service_id bigint references nmap_service (id)
+    nmap_service_id bigint references nmap_service (id),
+    created timestamp not null,
+    updated timestamp
+);
+create table nmap_script_element
+(
+    id                    SERIAL primary key,
+    key                   text,
+    value                 text,
+    nmap_script_result_id bigint references nmap_script_result (id),
+    created timestamp not null,
+    updated timestamp
 );
 
 create table settings
 (
     id    SERIAL primary key,
     name  text not null,
-    value text not null
+    value text not null,
+    created timestamp not null,
+    updated timestamp
 );
-insert into settings(name, value)
-values ('nmap', '/usr/bin/nmap');
+insert into settings(name, value, created)
+values ('nmap', '/usr/bin/nmap', now());
+
+insert into settings(name, value, created)
+values ('defaultScan', '-Pn -sV -sC -sT', now());
