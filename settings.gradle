@@ -1,2 +1,2 @@
 rootProject.name = 'PentestGUI'
-include 'ui'
+include 'frontend'

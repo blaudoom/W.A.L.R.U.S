@@ -8,12 +8,18 @@ I wanted to gather this cumulative information in one view, where I can see what
 
 
 ### How does it work?
+Its a SpringBoot application with currently a vue.js frontend. You can issue nmap scans from the UI. The scans are executed by the nmap binary configured in the settings.
 
 ### How do I use it?
+- Install postgres
+- Create a user and database for the application
+- Run the jar or build it yourself
 
 ### How do I install it?
+See above
 
 ### How do I configure it?
+
 
 ### Future Plans or stuff I was too lazy to do properly
 

@@ -39,6 +39,7 @@ create table target
     ip_address  text,
     project_id  bigint references project (id),
     state       text,
+    reason      text,
     created timestamp not null,
     updated timestamp
 );
@@ -47,11 +48,19 @@ create table nmap_scan
     id         SERIAL primary key,
     start_time bigint,
     status     text
-        CONSTRAINT status_enum check (status in ('RUNNING', 'DONE', 'FAILED')),
+        CONSTRAINT status_enum check (status in ('RUNNING', 'DONE', 'PARSING','FAILED')),
     project_id bigint references project (id),
     raw text,
     project_run_ordinal integer,
     errors text,
+    args text,
+    version text,
+    xml_output_version text,
+    type text,
+    protocol text,
+    num_services integer,
+    ports text,
+    imported boolean default false,
     created timestamp not null,
     updated timestamp
 );
@@ -71,6 +80,9 @@ create table target_service
     format         text,
     protocol       text,
     seen_on_scan_id    bigint references nmap_scan(id),
+    reason         text,
+    conf         text,
+    method       text,
     created timestamp not null,
     updated timestamp
 );
@@ -85,12 +97,20 @@ create table script_result
     updated timestamp
 );
 
+create table script_result_table
+(
+    id                    SERIAL primary key,
+    script_result_id bigint references script_result (id),
+    created timestamp not null,
+    updated timestamp
+);
+
 create table script_result_element
 (
     id                    SERIAL primary key,
     key                   text,
     value                 text,
-    script_result_id bigint references script_result (id),
+    script_result_table_id bigint references script_result_table (id),
     created timestamp not null,
     updated timestamp
 );
@@ -124,6 +144,7 @@ create table nmap_host
     ip_address   text,
     nmap_scan_id bigint references nmap_scan (id),
     state        text,
+    reason       text,
     created timestamp not null,
     updated timestamp
 );
@@ -140,6 +161,9 @@ create table nmap_service
     cpe          text,
     format       text,
     protocol     text,
+    reason       text,
+    conf         text,
+    method       text,
     created timestamp not null,
     updated timestamp
 );
@@ -161,12 +185,19 @@ create table nmap_script_result
     created timestamp not null,
     updated timestamp
 );
+create table nmap_script_table
+(
+    id                    SERIAL primary key,
+    nmap_script_result_id bigint references nmap_script_result (id),
+    created timestamp not null,
+    updated timestamp
+);
 create table nmap_script_element
 (
     id                    SERIAL primary key,
     key                   text,
     value                 text,
-    nmap_script_result_id bigint references nmap_script_result (id),
+    nmap_script_table_id bigint references nmap_script_table (id),
     created timestamp not null,
     updated timestamp
 );
@@ -179,8 +210,28 @@ create table settings
     created timestamp not null,
     updated timestamp
 );
+
+create table thymeleaf_template
+(
+    id    SERIAL primary key,
+    name  text not null,
+    template text not null,
+    created timestamp not null,
+    updated timestamp
+);
+
+create table parse_queue_object
+(
+    id           SERIAL primary key,
+    raw          text      not null,
+    nmap_scan_id bigint references nmap_scan (id),
+    parsed      boolean   default false,
+    created      timestamp not null,
+    updated      timestamp
+);
+
 insert into settings(name, value, created)
 values ('nmap', '/usr/bin/nmap', now());
 
 insert into settings(name, value, created)
-values ('defaultScan', '-Pn -sV -sC -sT', now());
+values ('defaultScan', '-Pn -sC -sT', now());

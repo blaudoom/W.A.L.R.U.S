@@ -1,0 +1,22 @@
+plugins {
+  id "com.github.node-gradle.node" version "7.0.0"
+}
+
+version '0.0.1'
+
+
+node {
+  version = '20.6.0'
+  npmVersion = '9.8.1'
+  download = false
+  workDir = file("${project.buildDir}/node")
+  //nodeModulesDir = file("${project.projectDir}")
+}
+
+
+
+
+task build(type: NpmTask) {
+  args = ['run', 'build:ci']
+}
+
