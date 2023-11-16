@@ -1,8 +1,14 @@
 # W.A.L.R.U.S
 ## Web Assessment Logging and Reporting ...Uh ... SYSTEM!
 
+## !!WARNING!! This application contains several "vulnerabilities", which are left as is for streamlining the usage.
+DO NOT HOST THIS APPLICATION OUTSIDE LOCALHOST!!! Unless you want to grant code execution to anyone who can access it.
+- You can give free nmap commands `nmap {insert command injection here}`
+- You can edit Thymeleaf templates. The version is new enough to mitigate most Java methods with system code execution, but still.
+- Currently, there is no authentication. Anyone can access the application and run commands.
+
 ### What is it?
-W.A.L.R.U.S is an UI for nmap. The idea is to gather cumulative information from several Nmap scans in one location. 
+W.A.L.R.U.S is a UI for nmap. The idea is to gather cumulative information from several Nmap scans in one location. 
 Many times when scanning larger networks or just wonky servers, some services appear online on some scans and not on others.
 I wanted to gather this cumulative information in one view, where I can see what services have been online on different scans.
 

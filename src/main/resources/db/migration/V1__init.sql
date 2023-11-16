@@ -101,6 +101,8 @@ create table script_result_table
 (
     id                    SERIAL primary key,
     script_result_id bigint references script_result (id),
+    script_result_table_id bigint references script_result_table (id),
+    element_key           text,
     created timestamp not null,
     updated timestamp
 );
@@ -189,6 +191,8 @@ create table nmap_script_table
 (
     id                    SERIAL primary key,
     nmap_script_result_id bigint references nmap_script_result (id),
+    nmap_script_table_id bigint references nmap_script_table (id),
+    element_key           text,
     created timestamp not null,
     updated timestamp
 );

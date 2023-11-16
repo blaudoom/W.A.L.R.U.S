@@ -55,6 +55,8 @@
                       <va-accordion v-if="result.scriptResultTables?.length > 0" v-model="showAccordion[sindex].result">
                         <va-collapse :header="'Script elements:'" :flat="true">
                           <div v-for="table in result.scriptResultTables" style="margin-top: 15px">
+
+                            <p v-if="table.elementKey"><strong>{{table.elementKey}}:</strong> </p>
                             <p
                               v-for="element in table.scriptResultElements"
                               style="margin-left: 15px; white-space: normal; word-break: break-all"
@@ -62,7 +64,19 @@
                               <strong>{{ element.key }}</strong> : {{ element.value }}
                             </p>
                             <br />
+                            <div v-for="child in table.childTables" style="margin-top: 15px">
+
+                              <p v-if="child.elementKey"><strong>{{child.elementKey}}:</strong> </p>
+                              <p
+                                v-for="element2 in child.scriptResultElements"
+                                style="margin-left: 15px; white-space: normal; word-break: break-all"
+                              >
+                                <strong>{{ element2.key }}</strong> : {{ element2.value }}
+                              </p>
+                              <br />
+                            </div>
                           </div>
+
                         </va-collapse>
                       </va-accordion>
                     </div>

@@ -1,0 +1,101 @@
+div#foobar{
+    margin: 25px;
+}
+table td {
+    word-break: break-all;
+}
+table th {
+    word-break: normal;
+}
+.script-element-table{
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin: -0.75em;
+}
+.script-sub-element-table tr{
+    background-color: #ffffff;
+}
+
+.service-table th{
+    font-weight: bold;
+    /*border: 1px dashed rgba(0, 0, 0, 0.1);*/
+
+}
+.script-result-table th, .script-result-table td{
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.script-result-table span{
+    vertical-align: top;
+
+
+}
+.script-result-table th{
+    font-weight: bold;
+    /*border: 1px dashed rgba(0, 0, 0, 0.1);*/
+
+}
+.script-result-table h2,.script-result-table h3, .script-result-table h4{
+    margin: 5px;
+    padding: 5px;
+
+}
+.script-result-table tr:nth-child(even) {
+    background-color: rgba(230, 235, 237, 0.1)
+}
+.script-result-table tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+
+.script-element-table tr:nth-child(even) {
+    background-color: rgba(230, 235, 237, 0.1)
+}
+.script-element-table tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 1);
+}
+.script-sub-element-table tr:nth-child(odd){
+    background-color: #ffffff;
+    border: none;
+}
+.script-sub-element-table tr:nth-child(even){
+    background-color: #ffffff;
+    border: none;
+}
+.script-sub-element-table{
+    border: none;
+}
+.script-sub-element-table th{
+    border: none;
+    border-collapse: collapse;
+}
+.script-sub-element-table td{
+    border: none;
+    border-collapse: collapse;
+}
+.script-sub-sub-element-table td{
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+table {
+    /*border-collapse: unset;*/
+    vertical-align: center;
+}
+
+ .material-symbols-outlined {
+     font-variation-settings:
+             'FILL' 0,
+             'wght' 400,
+             'GRAD' 0,
+             'opsz' 24
+ }
+@page {
+    size: A4;
+    margin: 0;
+}
+@media print {
+    html, body {
+        width: 210mm;
+        height: 297mm;
+    }
+
+    /* ... the rest of the rules ... */
+}
