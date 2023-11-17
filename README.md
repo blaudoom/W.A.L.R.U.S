@@ -12,6 +12,9 @@ W.A.L.R.U.S is a UI for nmap. The idea is to gather cumulative information from 
 Many times when scanning larger networks or just wonky servers, some services appear online on some scans and not on others.
 I wanted to gather this cumulative information in one view, where I can see what services have been online on different scans.
 
+The application has no tests, no proper error handling, no proper logging, no proper documentation, no proper input sanitation, no proper anything.
+It might not parse all nmap XMLs. Will add more parsing when I encounter more XMLs. Since I did not want to use the same schema for database as the XML.
+
 
 ### How does it work?
 Its a SpringBoot application with currently a vue.js frontend. You can issue nmap scans from the UI. The scans are executed by the nmap binary configured in the settings.
