@@ -3,9 +3,10 @@
     <va-card>
       <va-card-title>{{ t('forms.mediumEditor.title') }}</va-card-title>
       <va-card-content>
-        <va-textarea v-model="template.template" :max-rows="rows" style="width: 100%" :autosize="autoGrow">
+        <va-textarea v-model="template.template" :max-rows="rows" style="width: 100%; " :autosize="autoGrow">
         </va-textarea>
         <br />
+        <br/>
         <va-button @click="save()">Save</va-button>
       </va-card-content>
     </va-card>
@@ -15,11 +16,11 @@
 <script setup lang="ts">
   import { nextTick, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
-  import type MediumEditor from 'medium-editor'
+
 
   const { t } = useI18n()
   const template = ref([])
-  const rows = ref(300)
+  const rows = ref(50)
   const autoGrow = ref(true)
   fetch('http://localhost:9090/api/template/report')
     .then((response) => response.json())

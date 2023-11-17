@@ -2557,6 +2557,11 @@
   dependencies:
     "function-bind" "^1.1.1"
 
+"highlight.js@^11.9.0":
+  "integrity" "sha512-fJ7cW7fQGCYAkgv4CPfwFHrfd/cLS4Hau96JuJ+ZTOWhjnhoeN1ub1tFmALm/+lW5z4WCAuAV9bm05AP0mS6Gw=="
+  "resolved" "https://registry.npmjs.org/highlight.js/-/highlight.js-11.9.0.tgz"
+  "version" "11.9.0"
+
 "human-signals@^2.1.0":
   "integrity" "sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw=="
   "resolved" "https://registry.npmjs.org/human-signals/-/human-signals-2.1.0.tgz"

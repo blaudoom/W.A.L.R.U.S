@@ -235,7 +235,7 @@ create table parse_queue_object
 );
 
 insert into settings(name, value, created)
-values ('nmap', '/usr/bin/nmap', now());
+values ('nmap', 'nmap', now());
 
 insert into settings(name, value, created)
 values ('defaultScan', '-Pn -sC -sT', now());

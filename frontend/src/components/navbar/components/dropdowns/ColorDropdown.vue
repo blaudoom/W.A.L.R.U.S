@@ -15,14 +15,14 @@
         size="small"
       />
 
-      <table class="w-full my-4">
+      <!--table class="w-full my-4">
         <color-dropdown-item
           v-for="colorName in colorNames"
           :key="colorName"
           class="color-picker-dropdown"
           :color-name="colorName"
         />
-      </table>
+      </table-->
     </va-dropdown-content>
   </va-dropdown>
 </template>
@@ -35,7 +35,7 @@
 
   const { presets, applyPreset, colors } = useColors()
 
-  const currentTheme = ref('light')
+  const currentTheme = ref('dark')
 
   watchEffect(() => {
     applyPreset(currentTheme.value)

@@ -9,13 +9,15 @@
           @click="isSidebarMinimized = !isSidebarMinimized"
         />
         <router-link to="/">
-          <!--vuestic-logo class="logo" /-->
+          <p>Dashboard</p>
         </router-link>
       </div>
     </template>
-    <div class="app-navbar-center"></div>
+    <div class="app-navbar-center" style="right: 0">
+      <app-navbar-actions class="app-navbar__actions" :user-name="'userName'" />
+    </div>
     <template #right>
-      <app-navbar-actions class="app-navbar__actions" :user-name="userName" />
+      <app-navbar-actions class="app-navbar__actions" :user-name="'userName'" />
     </template>
   </va-navbar>
 </template>
