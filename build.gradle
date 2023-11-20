@@ -14,7 +14,14 @@ java {
 repositories {
     mavenCentral()
 }
-//processResources.dependsOn('frontend:build')
+task copyUi(type: Copy) {
+    from "$rootDir/frontend/dist"
+    into "$rootDir/src/main/resources/static/."
+}
+
+processResources.dependsOn('frontend:build')
+processResources.dependsOn(copyUi)
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
