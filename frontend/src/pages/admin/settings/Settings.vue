@@ -13,7 +13,7 @@
                 <th>Value</th>
                 <th>Actions</th>
               </tr>
-              <tr v-for="(setting, index) in settings">
+              <tr v-for="(setting, index) in settings" :key="setting.id">
                 <td>{{ setting?.name }}</td>
                 <td>
                   <template v-if="!showEdit[index]">

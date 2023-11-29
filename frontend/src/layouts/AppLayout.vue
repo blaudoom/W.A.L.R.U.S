@@ -1,6 +1,6 @@
 <template>
   <div class="app-layout">
-    <navbar/>
+    <navbar />
     <div class="app-layout__content">
       <div class="app-layout__sidebar-wrapper" :class="{ minimized: isSidebarMinimized }">
         <div v-if="isFullScreenSidebar" class="flex justify-end">

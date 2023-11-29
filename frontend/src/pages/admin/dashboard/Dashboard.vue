@@ -111,14 +111,11 @@
   function getStatusColor(status: string) {
     if (status === 'RUNNING') {
       return '#f5dd05'
-    }
-    else if (status === 'DONE') {
+    } else if (status === 'DONE') {
       return '#32a852'
-    }
-    else if (status === 'FAILED') {
+    } else if (status === 'FAILED') {
       return '#cf311f'
-    }
-    else if (status === 'PARSING') {
+    } else if (status === 'PARSING') {
       return '#f5dd05'
     }
   }

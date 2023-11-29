@@ -54,9 +54,9 @@
                       <p>Output: {{ scriptResult.output }}</p>
 
                       <ul>
-                        <li v-for="table in scriptResult.scriptResultTables">
+                        <li v-for="table in scriptResult.scriptResultTables" :key="table.id">
                           <ul>
-                            <li v-for="element in table.scriptResultElements">
+                            <li v-for="element in table.scriptResultElements" :key="element.id">
                               {{ element.key }}: {{ element.value }}
                             </li>
                           </ul>

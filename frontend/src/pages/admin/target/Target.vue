@@ -38,7 +38,7 @@
                 <th>Seen on scans</th>
                 <th>Actions</th>
               </tr>
-              <template v-for="(service, sindex) in target?.services || []">
+              <template v-for="(service, sindex) in target?.services || []" :key="service.id">
                 <tr>
                   <td>{{ service.name }} <va-icon name="material-icons-edit" @click="editName(sindex)"></va-icon></td>
                   <td>{{ service.state }} ({{ service.reason }})</td>
@@ -46,29 +46,33 @@
                   <td>{{ service.cpe }}</td>
                   <td style="width: 30%">
                     <p v-if="service.serviceNotes.length > 0" class="tinyheader">Notes:</p>
-                    <div v-for="note in service?.serviceNotes" style="margin: 2px">
+                    <div v-for="note in service?.serviceNotes" :key="note.id" style="margin: 2px">
                       <strong>{{ note.title }} : </strong>{{ note.content }}
                     </div>
                     <p v-if="service.scriptResults.length > 0" class="tinyheader">Scripts:</p>
-                    <div v-for="result in service?.scriptResults">
+                    <div v-for="result in service?.scriptResults" :key="result.id">
                       <strong>{{ result.title }} : </strong>{{ result.content }}
                       <va-accordion v-if="result.scriptResultTables?.length > 0" v-model="showAccordion[sindex].result">
                         <va-collapse :header="'Script elements:'" :flat="true">
-                          <div v-for="table in result.scriptResultTables" style="margin-top: 15px">
-
-                            <p v-if="table.elementKey"><strong>{{table.elementKey}}:</strong> </p>
+                          <div v-for="table in result.scriptResultTables" :key="table.id" style="margin-top: 15px">
+                            <p v-if="table.elementKey">
+                              <strong>{{ table.elementKey }}:</strong>
+                            </p>
                             <p
                               v-for="element in table.scriptResultElements"
+                              :key="element.id"
                               style="margin-left: 15px; white-space: normal; word-break: break-all"
                             >
                               <strong>{{ element.key }}</strong> : {{ element.value }}
                             </p>
                             <br />
-                            <div v-for="child in table.childTables" style="margin-top: 15px">
-
-                              <p v-if="child.elementKey"><strong>{{child.elementKey}}:</strong> </p>
+                            <div v-for="child in table.childTables" :key="child.id" style="margin-top: 15px">
+                              <p v-if="child.elementKey">
+                                <strong>{{ child.elementKey }}:</strong>
+                              </p>
                               <p
                                 v-for="element2 in child.scriptResultElements"
+                                :key="element2.id"
                                 style="margin-left: 15px; white-space: normal; word-break: break-all"
                               >
                                 <strong>{{ element2.key }}</strong> : {{ element2.value }}
@@ -76,7 +80,6 @@
                               <br />
                             </div>
                           </div>
-
                         </va-collapse>
                       </va-accordion>
                     </div>
@@ -93,7 +96,7 @@
                     </va-accordion>
                   </td>
                   <td>
-                    <template v-for="(scan, index) in service.seenOnScanId">
+                    <template v-for="(scan, index) in service.seenOnScanId" :key="scan.id">
                       <template v-if="index > 0">,</template>
                       <router-link
                         :to="{
@@ -128,7 +131,7 @@
                         <th>Notes / Script outputs</th>
                         <th>Fingerprint</th>
                       </tr>
-                      <tr v-for="(serviceIteration, i) in service?.targetServiceIterations">
+                      <tr v-for="(serviceIteration, i) in service?.targetServiceIterations" :key="serviceIteration.id">
                         <router-link
                           :to="{
                             name: 'scanDetails',
@@ -145,7 +148,7 @@
                         <td>{{ serviceIteration.cpe }}</td>
                         <td>
                           <p v-if="serviceIteration.scriptResults.length > 0" class="tinyheader">Scripts:</p>
-                          <div v-for="result in serviceIteration?.scriptResults" style="margin: 2px">
+                          <div v-for="result in serviceIteration?.scriptResults" :key="result.id" style="margin: 2px">
                             <strong>{{ result.title }} : </strong>{{ result.content }}
                           </div>
                         </td>
@@ -220,8 +223,8 @@
                 <th>Hostname</th>
                 <th>Type</th>
               </tr>
-              <tr v-for="hostname in target?.hostnames || []">
-                <td>{{ hostname.hostname }}</td>
+              <tr v-for="hostname in target?.hostnames || []" :key="hostname.id">
+                <td v-bind:>{{ hostname.hostname }}</td>
                 <td>{{ hostname.type }}</td>
               </tr>
             </table>

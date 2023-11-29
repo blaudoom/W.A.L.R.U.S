@@ -3,10 +3,10 @@
     <va-card>
       <va-card-title>{{ t('forms.mediumEditor.title') }}</va-card-title>
       <va-card-content>
-        <va-textarea v-model="template.template" :max-rows="rows" style="width: 100%; " :autosize="autoGrow">
+        <va-textarea v-model="template.template" :max-rows="rows" style="width: 100%" :autosize="autoGrow">
         </va-textarea>
         <br />
-        <br/>
+        <br />
         <va-button @click="save()">Save</va-button>
       </va-card-content>
     </va-card>
@@ -16,7 +16,6 @@
 <script setup lang="ts">
   import { nextTick, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
-
 
   const { t } = useI18n()
   const template = ref([])

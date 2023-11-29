@@ -41,3 +41,5 @@ See above
 - Proper documentation, now it's just a README.md
 - Proper testing, now it's just a print to console
 - More Nmap options, now it's just a few. You can always use the custom command option, but all output is not parsed.
+- MSF integration
+- Authentication (Mostly implemented, but commented out for now)
